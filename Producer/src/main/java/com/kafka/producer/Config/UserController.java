@@ -7,13 +7,14 @@ import org.springframework.kafka.core.KafkaProducerException;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
-    private KafkaTemplate<String, User> template;
+    private final KafkaTemplate<String, User> template;
 
     //inject kafka template
     @Autowired
@@ -22,12 +23,12 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<String> produceAndSaveUser(User user){
+    public ResponseEntity<String> produceAndSaveUser(@RequestBody User user){
         try{
+            System.out.println("sending event");
             template.send("save-user", user);
         }catch (KafkaProducerException ex){
             System.out.println("Exception "+ ex.getMessage());
-
         }
         return  ResponseEntity.ok("User register, and emitted event");
 
