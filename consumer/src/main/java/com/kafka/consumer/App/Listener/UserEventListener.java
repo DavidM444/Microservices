@@ -18,7 +18,7 @@ public class UserEventListener {
 
     @KafkaListener(topics = "save-user", groupId = "user-register")
     public void userListener(User user){
-        System.out.println("recibiendo evento "+ user.getNombre());
+        System.out.println("receiving event "+ user.getNombre());
         userService.serviceSaveUser(user);
     }
 }
