@@ -14,10 +14,10 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 import java.util.HashMap;
 import java.util.Map;
 
-@Configuration
+//@Configuration
 public class KafkaConsumerConfig {
 
-    @Bean
+    /*@Bean
     public ConsumerFactory<String, User> consumerFactory() {
         Map<String, Object> prop = new HashMap<>();
         prop.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
@@ -39,5 +39,5 @@ public class KafkaConsumerConfig {
     @Bean
     public StringJsonMessageConverter stringJsonMessageConverter() {
         return new StringJsonMessageConverter();
-    }
+    }*/
 }
