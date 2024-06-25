@@ -1,6 +1,7 @@
 package com.kafka.producer.Config;
 
 import com.kafka.producer.Entity.User;
+import org.apache.kafka.clients.consumer.StickyAssignor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaProducerException;
@@ -23,14 +24,14 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<String> produceAndSaveUser(@RequestBody User user){
+    public ResponseEntity<String> produceEventNewUser(@RequestBody User user){
         try{
             System.out.println("sending event");
             template.send("save-user", user);
         }catch (KafkaProducerException ex){
             System.out.println("Exception "+ ex.getMessage());
         }
-        return  ResponseEntity.ok("User register, and emitted event");
+        return ResponseEntity.ok("User register, and emitted event");
 
     }
 }
